@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NID Upload</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Upload Your NID</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit</button>
+        </form>
+
+        {% if result %}
+            <div class="result">
+                <h2>Response Data:</h2>
+                {% if result.error %}
+                    <p style="color: red;">Error: {{ result.error }}</p>
+                {% else %}
+                    <p><strong>Name:</strong> {{ result.result.Name }}</p>
+                    <p><strong>Father's Name:</strong> {{ result.result.Father_Name }}</p>
+                    <p><strong>Mother's Name:</strong> {{ result.result.Mother_Name }}</p>
+                    <p><strong>Birth:</strong> {{ result.result.Birth }}</p>
+                    <p><strong>ID NO:</strong> {{ result.result.ID_NO }}</p>
+                    <p><strong>Address:</strong> {{ result.result.Address }}</p>
+                    <p><strong>Blood Group:</strong> {{ result.result.Blood_Group }}</p>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
