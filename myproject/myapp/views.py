@@ -21,7 +21,7 @@ def upload_image(request):
 
             try:
                 # Send the request to FastAPI
-                response = requests.post(api_url, files=files)
+                response = requests.post(api_url, files=files, timeout=10)
 
                 if response.status_code == 200:
                     # Get the response JSON
