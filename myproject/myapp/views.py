@@ -7,8 +7,8 @@ def upload_image(request):
     if request.method == 'POST':
         form = ImageUploadForm(request.POST, request.FILES)
         if form.is_valid():
-            # Replace with actual FastAPI endpoint
-            api_url = "https://custom-fastapi-service-uxeku3pqoq-ue.a.run.app/generate"  # Your FastAPI URL
+            # FastAPI endpoint URL
+            api_url = "https://fastapi2-476477490775.us-central1.run.app/generate"  # Your FastAPI URL
 
             # Get the uploaded file
             uploaded_file = request.FILES['image']
@@ -21,24 +21,38 @@ def upload_image(request):
 
             try:
                 # Send the request to FastAPI
-                response = requests.post(api_url, files=files, timeout=10)
+                response = requests.post(api_url, files=files, timeout=30)
 
                 if response.status_code == 200:
                     # Get the response JSON
                     result = response.json()
-                    
-                    # Process the result to replace spaces in keys with underscores
-                    processed_result = {key.replace(' ', '_'): value for key, value in result['result'].items()}
+                    #print(result)  # This will print the JSON response
+
+                    # Process the data as per your format by removing apostrophes and spaces from keys
+                    processed_result = {
+                        "message": result.get('message', 'No message'),
+                        "document_id": result.get('document_id'),
+                        "data": {
+                            "Name": result['data'].get("Name"),
+                            "Fathers_Name": result['data'].get("Father's Name"),
+                            "Mothers_Name": result['data'].get("Mother's Name"),
+                            "Date_of_Birth": result['data'].get("Date of Birth"),
+                            "ID_No": result['data'].get("ID No"),
+                            "Address": result['data'].get("Address"),
+                            "Blood_Group": result['data'].get("Blood Group"),
+                        }
+                    }
                     
                     # Update the result to pass to the template
-                    result = {'result': processed_result}
-                    print(result)
+                    result = processed_result
+                    #print(result)  # This prints the processed result
                     
                 else:
                     result = {"error": f"API returned a status code {response.status_code}"}
             
             except Exception as e:
-                result = {"error": f"An error occurred: {str(e)}"}
+                #result = {"error": f"An error occurred: {str(e)}"}
+                result = {"error": "This is not a valid NID!"}
 
     else:
         form = ImageUploadForm()

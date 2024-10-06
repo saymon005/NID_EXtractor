@@ -22,13 +22,13 @@
                 {% if result.error %}
                     <p style="color: red;">Error: {{ result.error }}</p>
                 {% else %}
-                    <p><strong>Name:</strong> {{ result.result.Name }}</p>
-                    <p><strong>Father's Name:</strong> {{ result.result.Father_Name }}</p>
-                    <p><strong>Mother's Name:</strong> {{ result.result.Mother_Name }}</p>
-                    <p><strong>Birth:</strong> {{ result.result.Birth }}</p>
-                    <p><strong>ID NO:</strong> {{ result.result.ID_NO }}</p>
-                    <p><strong>Address:</strong> {{ result.result.Address }}</p>
-                    <p><strong>Blood Group:</strong> {{ result.result.Blood_Group }}</p>
+                    <p><strong>Name:</strong> {{ result.data.Name }}</p>
+                    <p><strong>Father's Name:</strong> {{ result.data.Fathers_Name }}</p>
+                    <p><strong>Mother's Name:</strong> {{ result.data.Mothers_Name }}</p>
+                    <p><strong>Date of Birth:</strong> {{ result.data.Date_of_Birth }}</p>
+                    <p><strong>ID No:</strong> {{ result.data.ID_No }}</p>
+                    <p><strong>Address:</strong> {{ result.data.Address }}</p>
+                    <p><strong>Blood Group:</strong> {{ result.data.Blood_Group }}</p>
                 {% endif %}
             </div>
         {% endif %}
