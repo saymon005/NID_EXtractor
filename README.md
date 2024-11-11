@@ -22,6 +22,7 @@ The Docker image is then deployed to Google Cloud Run, where it is managed and a
 Communication is handled through the API:
 The backend, now running on Cloud Run, communicates with the frontend by using exposed API endpoints.
 
+![Project](https://github.com/user-attachments/assets/942d5853-8054-47fe-b8ef-25a59ecb1793)
 
 Frontend Workflow:
 The frontend is developed using Django:
